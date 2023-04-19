@@ -22,7 +22,7 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(name= "user_id", nullable = false, updatable = false)
     @SequenceGenerator(
             name = "primary_sequence",
             sequenceName = "primary_sequence",

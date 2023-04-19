@@ -23,9 +23,9 @@
                             <th th:text="#{match.score.label}" scope="col" />
                             <th th:text="#{match.bestOf.label}" scope="col" />
                             <th th:text="#{match.tour.label}" scope="col" />
-                            <th th:text="#{match.minutes.label}" scope="col" />
-                            <th th:text="#{match.winnerAces.label}" scope="col" />
-                            <th th:text="#{match.winnerDoubleFaults.label}" scope="col" />
+                            <th th:text="#{match.tournament.label}" scope="col" />
+                            <th th:text="#{match.winner.label}" scope="col" />
+                            <th th:text="#{match.loser.label}" scope="col" />
                             <th><!-- --></th>
                         </tr>
                     </thead>
@@ -36,9 +36,9 @@
                             <td th:text="${match.score}" />
                             <td th:text="${match.bestOf}" />
                             <td th:text="${match.tour}" />
-                            <td th:text="${match.minutes}" />
-                            <td th:text="${match.winnerAces}" />
-                            <td th:text="${match.winnerDoubleFaults}" />
+                            <td th:text="${match?.tournament?.name}" />
+                            <td th:text="${match?.winner?.name}" />
+                            <td th:text="${match?.loser?.name}" />
                             <td>
                                 <div class="float-end text-nowrap">
                                     <a th:href="@{/matchs/edit/{id}(id=${match.id})}" th:text="#{match.list.edit}" class="btn btn-sm btn-info" />

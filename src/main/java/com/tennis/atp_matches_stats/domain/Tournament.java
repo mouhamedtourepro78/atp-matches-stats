@@ -18,17 +18,7 @@ import lombok.Setter;
 public class Tournament {
 
     @Id
-    @Column(nullable = false, updatable = false)
-    @SequenceGenerator(
-            name = "primary_sequence",
-            sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 10000
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
-    )
+    @Column(name = "tournament_id", nullable = false, updatable = false)
     private Long id;
 
     @Column

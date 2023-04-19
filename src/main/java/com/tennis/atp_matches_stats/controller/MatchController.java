@@ -49,10 +49,10 @@ public class MatchController {
                 .collect(CustomCollectors.toSortedMap(Tournament::getId, Tournament::getName)));
         model.addAttribute("winnerValues", playerRepository.findAll(Sort.by("id"))
                 .stream()
-                .collect(CustomCollectors.toSortedMap(Player::getId, Player::getSeed)));
+                .collect(CustomCollectors.toSortedMap(Player::getId, Player::getName)));
         model.addAttribute("loserValues", playerRepository.findAll(Sort.by("id"))
                 .stream()
-                .collect(CustomCollectors.toSortedMap(Player::getId, Player::getSeed)));
+                .collect(CustomCollectors.toSortedMap(Player::getId, Player::getName)));
     }
 
     @GetMapping

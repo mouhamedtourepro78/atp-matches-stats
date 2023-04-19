@@ -1,5 +1,8 @@
 package com.tennis.atp_matches_stats.model;
 
+import com.tennis.atp_matches_stats.domain.Player;
+import com.tennis.atp_matches_stats.domain.Tournament;
+
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -92,10 +95,10 @@ public class MatchDTO {
     @Size(max = 255)
     private String loserRankPoints;
 
-    private Long tournament;
+    private Tournament tournament;
 
-    private Long winner;
+    private Player winner;
 
-    private Long loser;
+    private Player loser;
 
 }

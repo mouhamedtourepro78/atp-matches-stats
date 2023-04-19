@@ -118,9 +118,9 @@ public class MatchServiceImpl implements MatchService {
         matchDTO.setWinnerRankPoints(match.getWinnerRankPoints());
         matchDTO.setLoserRank(match.getLoserRank());
         matchDTO.setLoserRankPoints(match.getLoserRankPoints());
-        matchDTO.setTournament(match.getTournament() == null ? null : match.getTournament().getId());
-        matchDTO.setWinner(match.getWinner() == null ? null : match.getWinner().getId());
-        matchDTO.setLoser(match.getLoser() == null ? null : match.getLoser().getId());
+        matchDTO.setTournament(match.getTournament() == null ? null : match.getTournament());
+        matchDTO.setWinner(match.getWinner() == null ? null : match.getWinner());
+        matchDTO.setLoser(match.getLoser() == null ? null : match.getLoser());
         return matchDTO;
     }
 
@@ -152,13 +152,13 @@ public class MatchServiceImpl implements MatchService {
         match.setWinnerRankPoints(matchDTO.getWinnerRankPoints());
         match.setLoserRank(matchDTO.getLoserRank());
         match.setLoserRankPoints(matchDTO.getLoserRankPoints());
-        final Tournament tournament = matchDTO.getTournament() == null ? null : tournamentRepository.findById(matchDTO.getTournament())
+        final Tournament tournament = matchDTO.getTournament() == null ? null : tournamentRepository.findById(matchDTO.getTournament().getId())
                 .orElseThrow(() -> new NotFoundException("tournament not found"));
         match.setTournament(tournament);
-        final Player winner = matchDTO.getWinner() == null ? null : playerRepository.findById(matchDTO.getWinner())
+        final Player winner = matchDTO.getWinner() == null ? null : playerRepository.findById(matchDTO.getWinner().getId())
                 .orElseThrow(() -> new NotFoundException("winner not found"));
         match.setWinner(winner);
-        final Player loser = matchDTO.getLoser() == null ? null : playerRepository.findById(matchDTO.getLoser())
+        final Player loser = matchDTO.getLoser() == null ? null : playerRepository.findById(matchDTO.getLoser().getId())
                 .orElseThrow(() -> new NotFoundException("loser not found"));
         match.setLoser(loser);
         return match;
