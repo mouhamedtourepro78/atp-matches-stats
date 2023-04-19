@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{tournament.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{tournament.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/tournaments/add}" th:text="#{tournament.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/utils::searchFilter(object='tournament')}" />
+            <div th:if="${tournaments.empty}" th:text="#{tournament.list.empty}" />
+            <div th:if="${!tournaments.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{tournament.id.label}" scope="col" />
+                            <th th:text="#{tournament.name.label}" scope="col" />
+                            <th th:text="#{tournament.surface.label}" scope="col" />
+                            <th th:text="#{tournament.drawSize.label}" scope="col" />
+                            <th th:text="#{tournament.level.label}" scope="col" />
+                            <th th:text="#{tournament.date.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="tournament : ${tournaments}">
+                            <td th:text="${tournament.id}" />
+                            <td th:text="${tournament.name}" />
+                            <td th:text="${tournament.surface}" />
+                            <td th:text="${tournament.drawSize}" />
+                            <td th:text="${tournament.level}" />
+                            <td th:text="${tournament.date}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/tournaments/edit/{id}(id=${tournament.id})}" th:text="#{tournament.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/tournaments/delete/{id}(id=${tournament.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button th:text="#{tournament.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:replace="~{fragments/utils::pagination()}" />
+        </div>
+    </body>
+</html>

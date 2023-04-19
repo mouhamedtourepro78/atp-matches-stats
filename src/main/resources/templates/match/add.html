@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{match.add.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{match.add.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/matchs}" th:text="#{match.add.back}" class="btn btn-secondary" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('match')}" />
+            <form th:action="${T(com.tennis.atp_matches_stats.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='matchNumber')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='score')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='bestOf')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='tour')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='minutes')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerAces')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerDoubleFaults')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerServicePoints')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerFirstServeIn')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerFirstServeWon')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerSecondServiceWon')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerServiceGames')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerSavedBreakPoints')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerFacedBreakPoints')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserAces')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserDoubleFaults')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserServicePoints')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserFirstServeIn')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserFirstServeWon')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserSecondServiceWon')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserServiceGames')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserSavedBreakPoints')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserFacedBreakPoints')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerRank')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winnerRankPoints')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserRank')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loserRankPoints')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='tournament', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='winner', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='match', field='loser', type='select')}" />
+                <input type="submit" th:value="#{match.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>
