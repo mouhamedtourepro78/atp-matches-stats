@@ -7,6 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +37,7 @@ public class Tournament {
     private String level;
 
     @Column
-    private String date;
+    private LocalDate date;
 
     @OneToMany(mappedBy = "tournament")
     private Set<Match> tournamentsMatchs;

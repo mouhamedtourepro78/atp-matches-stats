@@ -13,7 +13,14 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class DataSavingServiceImpl implements DataSavingService {
@@ -33,7 +40,7 @@ public class DataSavingServiceImpl implements DataSavingService {
     }
 
     @Override
-    public void parseCsvToMatchs(String fileName) throws IOException, CsvException {
+    public void parseCsvToMatchs(String fileName) throws IOException, CsvException, NumberFormatException {
 
         URL fileUrl = new File(fileName).toURI().toURL();
         CSVReader csvReader = new CSVReader(new FileReader(fileUrl.getFile()));
@@ -41,66 +48,73 @@ public class DataSavingServiceImpl implements DataSavingService {
 
         for (String[] dataLine : records) {
             Match match = new Match();
-            match.setId(Long.valueOf(dataLine[0].replace("-", "") + dataLine[6]));
+            match.setId(Long.valueOf(dataLine[0]));
             Tournament tournament = new Tournament();
             Player winner = new Player();
             Player loser = new Player();
-            tournament.setId(Long.valueOf(dataLine[0].replace("-", "")));
-            tournament.setName(dataLine[1]);
-            tournament.setSurface(dataLine[2]);
-            tournament.setDrawSize(dataLine[3]);
-            tournament.setLevel(dataLine[4]);
-            tournament.setDate(dataLine[5]);
+            tournament.setId(Long.valueOf(dataLine[1]));
+            tournament.setName(dataLine[2]);
+            tournament.setSurface(dataLine[3]);
+            tournament.setDrawSize(dataLine[4]);
+            tournament.setLevel(dataLine[5]);
+
+            String target = dataLine[6];
+
+            DateTimeFormatter f = DateTimeFormatter.ofPattern( "yyyyMMdd" );
+            LocalDate ld = LocalDate.parse(target ,f);
+
+            tournament.setDate(ld);
+
             match.setTournament(tournament);
-            match.setMatchNumber(dataLine[0] + dataLine[6]);
-            winner.setId(Long.valueOf(dataLine[7]));
-            winner.setSeed(dataLine[8]);
-            winner.setEntry(dataLine[9]);
-            winner.setName(dataLine[10]);
-            winner.setHand(dataLine[11]);
-            winner.setHeight(dataLine[12]);
-            winner.setNationality(dataLine[13]);
-            winner.setAge(dataLine[14]);
+            match.setMatchNumber(dataLine[7]);
+            winner.setId(Long.valueOf(dataLine[8]));
+            winner.setSeed(dataLine[9]);
+            winner.setEntry(dataLine[10]);
+            winner.setName(dataLine[11]);
+            winner.setHand(dataLine[12]);
+            winner.setHeight(dataLine[13]);
+            winner.setNationality(dataLine[14]);
+            winner.setAge(dataLine[15]);
             winner.setWonMatchs(matchService.findAllWonMatchsByPlayerId(winner.getId()));
             winner.setLostMatchs(matchService.findAllLostMatchsByPlayerId(winner.getId()));
             match.setWinner(winner);
-            loser.setId(Long.valueOf(dataLine[15]));
-            loser.setSeed(dataLine[16]);
-            loser.setEntry(dataLine[17]);
-            loser.setName(dataLine[18]);
-            loser.setHand(dataLine[19]);
-            loser.setHeight(dataLine[20]);
-            loser.setNationality(dataLine[21]);
-            loser.setAge(dataLine[22]);
+            loser.setId(Long.valueOf(dataLine[16]));
+            loser.setSeed(dataLine[17]);
+            loser.setEntry(dataLine[18]);
+            loser.setName(dataLine[19]);
+            loser.setHand(dataLine[20]);
+            loser.setHeight(dataLine[21]);
+            loser.setNationality(dataLine[22]);
+            loser.setAge(dataLine[23]);
             loser.setWonMatchs(matchService.findAllWonMatchsByPlayerId(loser.getId()));
             loser.setLostMatchs(matchService.findAllLostMatchsByPlayerId(loser.getId()));
             match.setLoser(loser);
-            match.setScore(dataLine[23]);
-            match.setBestOf(dataLine[24]);
-            match.setTour(dataLine[25]);
-            match.setMinutes(dataLine[26]);
-            match.setWinnerAces(dataLine[27]);
-            match.setWinnerDoubleFaults(dataLine[28]);
-            match.setWinnerServicePoints(dataLine[29]);
-            match.setWinnerFirstServeIn(dataLine[30]);
-            match.setWinnerFirstServeWon(dataLine[31]);
-            match.setWinnerSecondServiceWon(dataLine[32]);
-            match.setWinnerServiceGames(dataLine[33]);
-            match.setWinnerSavedBreakPoints(dataLine[34]);
-            match.setWinnerFacedBreakPoints(dataLine[35]);
-            match.setLoserAces(dataLine[36]);
-            match.setLoserDoubleFaults(dataLine[37]);
-            match.setLoserServicePoints(dataLine[38]);
-            match.setLoserFirstServeIn(dataLine[39]);
-            match.setLoserFirstServeWon(dataLine[40]);
-            match.setLoserSecondServiceWon(dataLine[41]);
-            match.setLoserServiceGames(dataLine[42]);
-            match.setLoserSavedBreakPoints(dataLine[43]);
-            match.setLoserFacedBreakPoints(dataLine[44]);
-            match.setWinnerRank(dataLine[45]);
-            match.setWinnerRankPoints(dataLine[46]);
-            match.setLoserRank(dataLine[47]);
-            match.setLoserRankPoints(dataLine[48]);
+            match.setScore(dataLine[24]);
+            match.setBestOf(dataLine[25]);
+            match.setTour(dataLine[26]);
+            match.setMinutes(dataLine[27]);
+            match.setWinnerAces(dataLine[28]);
+            match.setWinnerDoubleFaults(dataLine[29]);
+            match.setWinnerServicePoints(dataLine[30]);
+            match.setWinnerFirstServeIn(dataLine[31]);
+            match.setWinnerFirstServeWon(dataLine[32]);
+            match.setWinnerSecondServiceWon(dataLine[33]);
+            match.setWinnerServiceGames(dataLine[34]);
+            match.setWinnerSavedBreakPoints(dataLine[35]);
+            match.setWinnerFacedBreakPoints(dataLine[36]);
+            match.setLoserAces(dataLine[37]);
+            match.setLoserDoubleFaults(dataLine[38]);
+            match.setLoserServicePoints(dataLine[39]);
+            match.setLoserFirstServeIn(dataLine[40]);
+            match.setLoserFirstServeWon(dataLine[41]);
+            match.setLoserSecondServiceWon(dataLine[42]);
+            match.setLoserServiceGames(dataLine[43]);
+            match.setLoserSavedBreakPoints(dataLine[44]);
+            match.setLoserFacedBreakPoints(dataLine[45]);
+            match.setWinnerRank(dataLine[46]);
+            match.setWinnerRankPoints(dataLine[47]);
+            match.setLoserRank(dataLine[48]);
+            match.setLoserRankPoints(dataLine[49]);
 
 
             //       if (!findingPlayer(winner) && !findingPlayer(loser) && !findingTournament(tournament)) {

@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -23,7 +25,6 @@ public class TournamentDTO {
     @Size(max = 255)
     private String level;
 
-    @Size(max = 255)
-    private String date;
+    private LocalDate date;
 
 }

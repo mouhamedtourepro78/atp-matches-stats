@@ -18,7 +18,7 @@ public class AtpMatchesStatsApplication implements ApplicationRunner {
     }
 
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) {  
         SpringApplication.run(AtpMatchesStatsApplication.class, args);
     }
 
