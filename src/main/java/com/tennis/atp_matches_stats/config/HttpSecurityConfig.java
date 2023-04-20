@@ -33,6 +33,8 @@ public class HttpSecurityConfig {
                 .authorizeHttpRequests()
                     .requestMatchers("/", "/login", "/register", "/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
                     .anyRequest().hasRole(HttpUserDetailsService.USER).and()
+                .requiresChannel()
+                    .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null).requiresSecure().and()
                 .exceptionHandling().authenticationEntryPoint(
                     new LoginUrlAuthenticationEntryPoint("/login?loginRequired=true")).and()
                 .formLogin()
