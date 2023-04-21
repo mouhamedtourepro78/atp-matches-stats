@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{home.index.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <h1 th:text="#{home.index.headline}" class="mb-4" />
+            <p th:utext="#{home.index.text}" class="mb-5" />
+            <div class="col-md-4 mb-5">
+                <h4 th:text="#{home.index.exploreEntities}" class="mb-3" />
+                <div class="list-group">
+                    <a th:href="@{/matchs}" th:text="#{match.list.headline}" class="list-group-item list-group-item-action" />
+                    <a th:href="@{/players}" th:text="#{player.list.headline}" class="list-group-item list-group-item-action" />
+                    <a th:href="@{/roles}" th:text="#{role.list.headline}" class="list-group-item list-group-item-action" />
+                    <a th:href="@{/tournaments}" th:text="#{tournament.list.headline}" class="list-group-item list-group-item-action" />
+                    <a th:href="@{/users}" th:text="#{user.list.headline}" class="list-group-item list-group-item-action" />
+                    <a th:href="@{/avgStats}" th:text="#{avgStat.list.headline}" class="list-group-item list-group-item-action" />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

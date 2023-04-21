@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{player.add.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{player.add.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/players}" th:text="#{player.add.back}" class="btn btn-secondary" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('player')}" />
+            <form th:action="${T(com.tennis.atp_matches_stats.util.WebUtils).getRequest().requestURI}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='player', field='name')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='player', field='hand')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='player', field='height', type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='player', field='nationality')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='player', field='age')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='player', field='avgStat', type='select')}" />
+                <input type="submit" th:value="#{player.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

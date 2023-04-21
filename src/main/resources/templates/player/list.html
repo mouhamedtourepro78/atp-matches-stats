@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{player.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{player.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/players/add}" th:text="#{player.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/utils::searchFilter(object='player')}" />
+            <div th:if="${players.empty}" th:text="#{player.list.empty}" />
+            <div th:if="${!players.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{player.id.label}" scope="col" />
+                            <th th:text="#{player.name.label}" scope="col" />
+                            <th th:text="#{player.hand.label}" scope="col" />
+                            <th th:text="#{player.height.label}" scope="col" />
+                            <th th:text="#{player.nationality.label}" scope="col" />
+                            <th th:text="#{player.age.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="player : ${players}">
+                            <td th:text="${player.id}" />
+                            <td th:text="${player.name}" />
+                            <td th:text="${player.hand}" />
+                            <td th:text="${player.height}" />
+                            <td th:text="${player.nationality}" />
+                            <td th:text="${player.age}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/players/edit/{id}(id=${player.id})}" th:text="#{player.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/players/delete/{id}(id=${player.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button th:text="#{player.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:replace="~{fragments/utils::pagination()}" />
+        </div>
+    </body>
+</html>

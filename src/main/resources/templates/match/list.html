@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{match.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{match.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/matchs/add}" th:text="#{match.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/utils::searchFilter(object='match')}" />
+            <div th:if="${matchs.empty}" th:text="#{match.list.empty}" />
+            <div th:if="${!matchs.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{match.id.label}" scope="col" />
+                            <th th:text="#{match.matchNumber.label}" scope="col" />
+                            <th th:text="#{match.score.label}" scope="col" />
+                            <th th:text="#{match.bestOf.label}" scope="col" />
+                            <th th:text="#{match.matchRound.label}" scope="col" />
+                            <th th:text="#{match.minutes.label}" scope="col" />
+                            <th th:text="#{match.tournament.label}" scope="col" />
+                            <th th:text="#{match.winner.label}" scope="col" />
+                            <th th:text="#{match.loser.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="match : ${matchs}">
+                            <td th:text="${match.id}" />
+                            <td th:text="${match.matchNumber}" />
+                            <td th:text="${match.score}" />
+                            <td th:text="${match.bestOf}" />
+                            <td th:text="${match.matchRound}" />
+                            <td th:text="${match.minutes}" />
+                            <td th:text="${match.tournament.name}" />
+                            <td th:text="${match.winner.name}" />
+                            <td th:text="${match.loser.name}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/matchs/edit/{id}(id=${match.id})}" th:text="#{match.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/matchs/delete/{id}(id=${match.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button th:text="#{match.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:replace="~{fragments/utils::pagination()}" />
+        </div>
+    </body>
+</html>

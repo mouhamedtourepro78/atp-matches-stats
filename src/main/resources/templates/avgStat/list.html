@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{avgStat.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{avgStat.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/avgStats/add}" th:text="#{avgStat.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:replace="~{fragments/utils::searchFilter(object='avgStat')}" />
+            <div th:if="${avgStats.empty}" th:text="#{avgStat.list.empty}" />
+            <div th:if="${!avgStats.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <td th:text="${avgStat.player.label}" scope="col"/>
+                            <th th:text="#{avgStat.avgServicePoints.label}" scope="col" />
+                            <th th:text="#{avgStat.avgFirstServeIn.label}" scope="col" />
+                            <th th:text="#{avgStat.avgFirstServeWon.label}" scope="col" />
+                            <th th:text="#{avgStat.avgSecondServeWon.label}" scope="col" />
+                            <th th:text="#{avgStat.savedBreakPoints.label}" scope="col" />
+                            <th th:text="#{avgStat.facedBreakPoints.label}" scope="col" />
+                           
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="avgStat : ${avgStats}">
+                            <td th:text="${avgStat.player.name}" />
+                            <td th:text="${avgStat.avgServicePoints}" />
+                            <td th:text="${avgStat.avgFirstServeIn}" />
+                            <td th:text="${avgStat.avgFirstServeWon}" />
+                            <td th:text="${avgStat.avgSecondServeWon}" />
+                            <td th:text="${avgStat.savedBreakPoints}" />
+                            <td th:text="${avgStat.facedBreakPoints}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/avgStats/edit/{id}(id=${avgStat.id})}" th:text="#{avgStat.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/avgStats/delete/{id}(id=${avgStat.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button th:text="#{avgStat.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:replace="~{fragments/utils::pagination()}" />
+        </div>
+    </body>
+</html>
