@@ -28,7 +28,11 @@ public class HttpSecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(final HttpSecurity http) throws Exception {
-        return http.cors().and()
+        return http
+                .requiresChannel()
+                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+                .requiresSecure().and()
+                .cors().and()
                 .csrf().ignoringRequestMatchers("/api/**").and()
                 .authorizeHttpRequests()
                     .requestMatchers("/", "/login", "/register", "/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
