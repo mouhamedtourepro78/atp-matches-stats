@@ -18,7 +18,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Player {
-
     @Id
     @Column(name = "player_id", nullable = false, updatable = false)
     private Long id;
