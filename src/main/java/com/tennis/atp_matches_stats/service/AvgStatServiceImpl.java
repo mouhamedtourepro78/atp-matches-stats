@@ -124,13 +124,32 @@ public class AvgStatServiceImpl implements AvgStatService {
         return null;
     }
 
-    private double calculateAverage(List <Long> marks) {
+    private double computeAverage(List <Long> marks) {
        
-        DoubleSummaryStatistics iss = marks.stream().mapToDouble((a) -> a). summaryStatistics();
+        DoubleSummaryStatistics iss = marks.stream().mapToDouble((a) -> a).summaryStatistics();
 
         return (double) Math.round(iss.getAverage()*10)/10;
       }
-    
+
+    private double calculateAverage(List<Long> marks) {
+
+        Long sum = 0L;
+        int k = 0;
+        for (Long l : marks) {
+
+            sum += l;
+            if(l == 0){
+
+                k++;
+            }
+        }
+        if (marks.isEmpty()) {
+            return 0;
+        } else {
+            double t = marks.size() - k;
+            return  (double) Math.round((double) (sum / t) * 10) /10;
+        }
+    }
 
     @Override
     public AvgStat computeAvgStatsByPlayer(Player player) {
@@ -184,8 +203,7 @@ public class AvgStatServiceImpl implements AvgStatService {
             avgStat.setAvgServiceGames(avgServiceGames);
             avgStat.setAvgSavedBreakPoints(avgSavedBreakPoints);
             avgStat.setAvgFacedBreakPoints(avgFacedBreakPoints);
-            avgStat.setPlayer(player == null ? null : playerRepository.findById(player.getId())
-            .orElseThrow(() -> new NotFoundException("player not found")));
+            avgStat.setPlayer(player);
 
             return avgStat;
             

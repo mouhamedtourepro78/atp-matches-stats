@@ -225,23 +225,22 @@ public class DataSavingServiceImpl implements DataSavingService {
         
             statRepository.save(winnerStat);
             statRepository.save(loserStat);
-            if(winner != null) 
+            
             winnerAvgStat = avgStatService.computeAvgStatsByPlayer(winner);
-            if(loser != null)
+  
             loserAvgStat = avgStatService.computeAvgStatsByPlayer(loser);
 
-          //  winnerAvgStat.setPlayer(winner);
-           // loserAvgStat.setPlayer(loser);
+            winnerAvgStat.setPlayer(winner);
+            loserAvgStat.setPlayer(loser);
 
             winner.setAvgStat(winnerAvgStat);
             loser.setAvgStat(loserAvgStat);
 
-        //    avgStatRepository.save(winnerAvgStat);
-       //     avgStatRepository.save(loserAvgStat);
+            avgStatRepository.save(winnerAvgStat);
+            avgStatRepository.save(loserAvgStat);   
         
             matchRepository.save(match);
     
-           
         }
     }
 }

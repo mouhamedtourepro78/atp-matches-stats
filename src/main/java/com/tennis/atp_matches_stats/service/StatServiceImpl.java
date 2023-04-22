@@ -108,7 +108,9 @@ public class StatServiceImpl implements StatService {
         stat.setFacedBreakPoints(statDTO.getFacedBreakPoints());
         stat.setRank(statDTO.getRank());
         stat.setRankPoints(statDTO.getRankPoints());
-        
+        final Player player = statDTO.getPlayer() == null ? null : playerRepository.findById(statDTO.getPlayer().getId())
+                .orElseThrow(() -> new NotFoundException("player not found"));
+        stat.setPlayer(player);
         return stat;
     }
 
@@ -116,5 +118,4 @@ public class StatServiceImpl implements StatService {
     public Set<Stat> findPlayerStatsByPlayerId(Long playerId) {
         return statRepository.findPlayerStatsByPlayerId(playerId);
     }
-
 }

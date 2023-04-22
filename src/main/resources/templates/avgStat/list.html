@@ -18,13 +18,13 @@
                 <table class="table table-striped table-hover align-middle">
                     <thead>
                         <tr>
-                            <td th:text="${avgStat.player.label}" scope="col"/>
+                            <th th:text="#{avgStat.player.label}" scope="col" />
                             <th th:text="#{avgStat.avgServicePoints.label}" scope="col" />
                             <th th:text="#{avgStat.avgFirstServeIn.label}" scope="col" />
                             <th th:text="#{avgStat.avgFirstServeWon.label}" scope="col" />
                             <th th:text="#{avgStat.avgSecondServeWon.label}" scope="col" />
-                            <th th:text="#{avgStat.savedBreakPoints.label}" scope="col" />
-                            <th th:text="#{avgStat.facedBreakPoints.label}" scope="col" />
+                            <th th:text="#{avgStat.avgSavedBreakPoints.label}" scope="col" />
+                            <th th:text="#{avgStat.avgFacedBreakPoints.label}" scope="col" />
                            
                             <th><!-- --></th>
                         </tr>
@@ -36,8 +36,8 @@
                             <td th:text="${avgStat.avgFirstServeIn}" />
                             <td th:text="${avgStat.avgFirstServeWon}" />
                             <td th:text="${avgStat.avgSecondServeWon}" />
-                            <td th:text="${avgStat.savedBreakPoints}" />
-                            <td th:text="${avgStat.facedBreakPoints}" />
+                            <td th:text="${avgStat.avgSavedBreakPoints}" />
+                            <td th:text="${avgStat.avgFacedBreakPoints}" />
                             <td>
                                 <div class="float-end text-nowrap">
                                     <a th:href="@{/avgStats/edit/{id}(id=${avgStat.id})}" th:text="#{avgStat.list.edit}" class="btn btn-sm btn-info" />
