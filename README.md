@@ -2,7 +2,7 @@
 
 This app was created with Bootify.io - tips on working with the code [can be found here](https://bootify.io/next-steps/). Feel free to contact us for further questions.
 
-The application can be accessed through: https://atp-matches-stats.herokuapp.com/
+The application can be accessed through: https://atp-matches-stats.herokuapp.com/ (Login : admin / Passeword : admin)
 
 ## Development
 
